@@ -138,22 +138,39 @@ app.delete("/api/delete/:id", (req, res) => {
     });
 })
 
-// Обработка добавления нового клиента
-app.post("/api/add", (req, res) => {
+// Обработка добавления новой услуги
+app.post("/api/add_services", (req, res) => {
   if (!req.body) return res.sendStatus(400);
-  console.log('Пришёл POST запрос для добавления нового клиента:');
+  console.log('Пришёл POST запрос для добавления новой услуги:');
   console.log(req.body);
-  connection.query(`INSERT INTO clients ( name, sername, phone, email, login, password) VALUES (?, ?, ?, ?, ?, ?);`,
-  [ req.body.name, req.body.sername, req.body.phone, req.body.email, req.body.login, req.body.password],
+  connection.query(`INSERT INTO services (id, name, time, cost) VALUES (NULL, ?, ?, ?);`,
+  [ req.body.name, req.body.time, req.body.cost],
     function (err) {
       if (err) {
-        res.status(500).send('Ошибка сервера при регистрации пользователя')
+        res.status(500).send('Ошибка сервера при добавлении услуги')
         console.log(err);
       }
       console.log('Создание прошло успешно');
       res.json("create");
     });
 })
+
+// Обработка добавления нового клиента
+app.post("/api/add", (req, res) => {
+    if (!req.body) return res.sendStatus(400);
+    console.log('Пришёл POST запрос для добавления нового клиента:');
+    console.log(req.body);
+    connection.query(`INSERT INTO clients ( id, name, sername, phone, email, login, password) VALUES (NUUL, ?, ?, ?, ?, ?, ?);`,
+    [ req.body.name, req.body.sername, req.body.phone, req.body.email, req.body.login, req.body.password],
+      function (err) {
+        if (err) {
+          res.status(500).send('Ошибка сервера при регистрации пользователя')
+          console.log(err);
+        }
+        console.log('Создание прошло успешно');
+        res.json("create");
+      });
+  })
 
 // Информирование о запуске сервера и его порте
 app.listen(3001, () => {

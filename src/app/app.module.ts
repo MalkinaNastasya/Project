@@ -14,6 +14,7 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { BeauticiansComponent } from './beauticians/beauticians.component';
 import { ServicesComponent } from './services/services.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RegistrationComponent } from './registration/registration.component';
     AppointmentsComponent,
     BeauticiansComponent,
     ServicesComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
