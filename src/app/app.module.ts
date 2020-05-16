@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { BeauticiansComponent } from './beauticians/beauticians.component';
+import { ServicesComponent } from './services/services.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { AdminComponent } from './admin/admin.component';
     HeaderComponent,
     AuthorizationComponent,
     MainComponent,
-    AdminComponent
+    AdminComponent,
+    AppointmentsComponent,
+    BeauticiansComponent,
+    ServicesComponent
   ],
   imports: [
     BrowserModule,
