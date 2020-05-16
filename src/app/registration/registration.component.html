@@ -1,0 +1,34 @@
+    <div class="container">
+        <h2 class="mb-3">Регистрация</h2>
+        <h5 *ngIf="succes" class="text-success">Вы зарегистрированы!</h5>
+            <form [formGroup]="form" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="text"> Введите имя</label>
+                  <input (focus)="onSucces()" formControlName="name" type="text" class="foc-bread br-gray-bread form-control" id="name">
+                 </div>
+                 <div class="form-group">
+                    <label for="text">Введите фамилию</label>
+                    <input (focus)="onSucces()" formControlName="sername" type="text" class="foc-bread br-gray-bread form-control" id="sername">
+                   </div>
+                <div class="form-group">
+                    <label for="text">Введите номер телефона</label>
+                    <input (focus)="onSucces()" formControlName="phone" type="text" class="foc-bread br-gray-bread form-control" id="phone">
+                   </div>
+                <div class="form-group">
+                    <label for="number">Введите почту</label>
+                    <input (focus)="onSucces()" formControlName="email" type="text" class="foc-bread br-gray-bread form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="weight">Введите логин</label>
+                    <input (focus)="onSucces()" formControlName="login" type="text" class="foc-bread br-gray-bread form-control" id="login">
+                </div>
+                <div class="form-group">
+                    <label for="weight">Введите пароль</label>
+                    <input (focus)="onSucces()" formControlName="password" type="password" class="foc-bread br-gray-bread form-control" id="password">
+                </div>     
+             <h5 *ngIf="!isEmpty" class="text-danger">Одно или несколько полей пустые!</h5>
+                 <button class="btn btn-primary btn-gray-bread btn-block" (click)="onAdd()">Зарегистрироваться</button>
+        <br><br><br><br><br><br><br>
+    
+      </form>
+    </div>

@@ -6,11 +6,13 @@ import { AdminComponent } from './admin/admin.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { BeauticiansComponent } from './beauticians/beauticians.component';
 import { ServicesComponent } from './services/services.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 const routes: Routes = [
   {path: '', component: MainComponent},
   {path: 'authorization', component: AuthorizationComponent},
+  {path: 'registration', component: RegistrationComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'appointments', component: AppointmentsComponent},
   {path: 'beauticians', component: BeauticiansComponent},

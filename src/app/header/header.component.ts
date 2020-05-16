@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
 
  // Логическая переменная, авторизирован пользователь или нет
  logOut = true;
- name="";
+ name="admin";
  constructor(private router: Router) { }
 
  ngOnInit() {
@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
  ngDoCheck(){
    if (localStorage.getItem('role') !== null) {
      this.name = localStorage.getItem('role');
+     this.name = "admin";
      console.log('Роль: ', this.name);
      this.logOut=false;; 
    }
