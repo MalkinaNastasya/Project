@@ -1,13 +1,13 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MainService } from '../shared/services/main.service';
 import { Service } from '../shared/modals/service.modal';
 
 @Component({
-  selector: 'app-services',
-  templateUrl: './services.component.html',
-  styleUrls: ['./services.component.css']
+  selector: 'app-catalog',
+  templateUrl: './catalog.component.html',
+  styleUrls: ['./catalog.component.css']
 })
-export class ServicesComponent implements OnInit {
+export class CatalogComponent implements OnInit {
 
   service_filter: boolean;
   search_service = "";

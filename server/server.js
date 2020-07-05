@@ -121,8 +121,7 @@ app.get("/api/services", function (req, res) {
     try {
       connection.query("SELECT * FROM `services`", function (
         error,
-        results,
-        fields
+        results
       ) {
         if (error) {
           res.status(500).send("Ошибка сервера при получении услуг");
@@ -176,8 +175,8 @@ app.post("/api/add_services", (req, res) => {
   if (!req.body) return res.sendStatus(400);
   console.log('Пришёл POST запрос для добавления новой услуги:');
   console.log(req.body);
-  connection.query(`INSERT INTO services (id, name, time, cost) VALUES (NULL, ?, ?, ?);`,
-  [ req.body.name, req.body.time, req.body.cost],
+  connection.query(`INSERT INTO services (id, name, time, cost, description) VALUES (NULL, ?, ?, ?, ?);`,
+  [ req.body.name, req.body.time, req.body.cost, req.body.description],
     function (err) {
       if (err) {
         res.status(500).send('Ошибка сервера при добавлении услуги')
@@ -185,6 +184,25 @@ app.post("/api/add_services", (req, res) => {
       }
       console.log('Создание прошло успешно');
       res.json("create");
+    });
+})
+
+// Обработка получения информации об одной услуге
+app.post("/api/oneService", (req, res) => {
+  if (!req.body) return res.sendStatus(400);
+  console.log('Пришёл POST запрос для загрузки страницы об услуге:');
+  console.log(req.body);
+  connection.query('SELECT * FROM services WHERE id=?;',
+  [req.body.id],
+    function (err, results) {
+      if (err) {
+        res.status(500).send('Ошибка сервера при поиске услуге по id ')
+        console.log(err);
+      }
+      console.log('Услуга найдена успешно');
+      console.log('Результаты:');
+      console.log(results);
+      res.json(results);
     });
 })
 

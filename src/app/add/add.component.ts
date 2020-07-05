@@ -25,17 +25,19 @@ export class AddComponent implements OnInit {
       'name': new FormControl('', [Validators.required]),
       'time': new FormControl('', [Validators.required]),
       'cost': new FormControl('', [Validators.required]),
+      'description': new FormControl('', [Validators.required]),
       })
   }
 
   // Функция добавления информации об услуге, полученной с формы, в базу данных
   async onAdd(){   
-    if ((this.form.value.name=="")||(this.form.value.time=="")||(this.form.value.cost=="")) {
+    if ((this.form.value.name=="")||(this.form.value.description=="")||(this.form.value.time=="")||(this.form.value.cost=="")) {
       this.isEmpty=false;
     } else {
       this.isEmpty=true;
       let service = {
         name: this.form.value.name,
+        description: this.form.value.description,
         time: this.form.value.time,
         cost: this.form.value.cost,
       }

@@ -1,15 +1,11 @@
 .collection{
     width: 200px;
 }
-.row{
+.container-for-main-block{
     margin-left: 300px;
+    margin-top: -150px;
 }
-.del{
-    cursor: pointer;
-}
-.add{
-    margin-left: 950px;
-}
+
 .container{
     margin-left: 20px;
 }

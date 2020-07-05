@@ -1,12 +1,6 @@
 <div class="container">
-  <h2 class="Title"> Личный кабинет администратора</h2>
-<div class="collection">
-    <a class="collection-item " [routerLink]="['/appointments']">Записи клиентов</a>
-    <a class="collection-item" [routerLink]="['/beauticians']">Список сотрудников</a>
-    <a class="collection-item active" [routerLink]="['/services']">Список услуг</a>
-  </div>
-
-  <div class="container-for-main-block">
+    <h2 class="mt-5 mb-3 d-flex justify-content-center">Каталог услуг</h2>
+    <p *ngIf="hide2 && hide1 && hide3" class="mt-4 mb-4 d-flex justify-content-center">Хотите записаться на услугу?<a [routerLink]="['/authorization']">&nbsp; Пожалуйста, авторизируйтесь!</a></p>
     <div class="row mt-2 mb-1">
     <div class="col-5">
       <div class="input-group mb-2">
@@ -21,7 +15,7 @@
       <div  class="spinner-border txt-gray-bread m-auto" role="status">
         <span class="sr-only ">Loading...</span>
       </div>
-  </div>
+      </div>
     <div class="container mt-5" *ngIf="!loading">
         <div class="row" *ngIf="!hide2">
           <div class="col-sm-12 col-md-12 col-lg-auto col-xl-auto">
@@ -35,6 +29,4 @@
           <h3 class="font-weight-normal">К сожалению, услуг не найдено.</h3>
         </ng-template>
     </div>
-</div>
-</div>
     
