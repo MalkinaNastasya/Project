@@ -170,6 +170,22 @@ app.delete("/api/delete/:id", (req, res) => {
     });
 })
 
+// Обработка удаления косметолога
+app.delete("/api/delete-beautician/:id", (req, res) => {
+  if (!req.body) return res.sendStatus(400);
+  console.log('Пришёл DELETE запрос для удаления:');
+  console.log(req.body);
+  connection.query(`DELETE FROM beauticians WHERE id=${req.params.id}`,
+    function (err) {
+      if (err) {
+        res.status(500).send('Ошибка сервера при удалении карточки услуги по id')
+        console.log(err);
+      }
+      console.log('Удаление прошло успешно');
+      res.json("delete");
+    });
+})
+
 // Обработка добавления новой услуги
 app.post("/api/add_services", (req, res) => {
   if (!req.body) return res.sendStatus(400);
@@ -180,6 +196,22 @@ app.post("/api/add_services", (req, res) => {
     function (err) {
       if (err) {
         res.status(500).send('Ошибка сервера при добавлении услуги')
+        console.log(err);
+      }
+      console.log('Создание прошло успешно');
+      res.json("create");
+    });
+})
+// Обработка добавления косметолога
+app.post("/api/add-beautician", (req, res) => {
+  if (!req.body) return res.sendStatus(400);
+  console.log('Пришёл POST запрос для добавления нового сотрудника:');
+  console.log(req.body);
+  connection.query(`INSERT INTO beauticians (id, name, sername, role, info, services) VALUES (NULL, ?, ?, ?, ?, ?);`,
+  [ req.body.name, req.body.sername, req.body.role, req.body.info, req.body.services],
+    function (err) {
+      if (err) {
+        res.status(500).send('Ошибка сервера при добавлении сотрудника')
         console.log(err);
       }
       console.log('Создание прошло успешно');

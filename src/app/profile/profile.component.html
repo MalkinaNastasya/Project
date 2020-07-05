@@ -1,21 +1,13 @@
 <div class="container">
     <h2 class="Title">
         <span *ngIf="!hideAdmin"> Личный кабинет администратора</span>
-        <span *ngIf="!hideManager"> Личный кабинет менеджера</span>
+        <span *ngIf="!hideManager"> Личный кабинет косметолога</span>
         <span *ngIf="!hideClient"> Личный кабинет клиента</span></h2>
     <div *ngIf="!hideAdmin">
         <app-admin></app-admin>
     </div>
     <div *ngIf="!hideManager">
-        <h3 class="mt-3 mb-3">Управление заявками и записями: </h3>
-        <div class="list-group">
-            <button type="button" class="list-group-item list-group-item-action"
-                [routerLink]="['/list-requests']">Список заявок на обратный звонок
-            </button>
-            <button type="button" class="list-group-item list-group-item-action"
-                [routerLink]="['/list-records']">Список записей к мастерам
-            </button>
-        </div>
+        <app-manager></app-manager>
     </div>
     <div *ngIf="!hideClient">
         <app-cabinet></app-cabinet>

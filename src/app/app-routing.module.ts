@@ -16,6 +16,8 @@ import { CreateComponent } from './create/create.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { ServiceCardViewComponent } from './service-card-view/service-card-view.component';
+import { ServicesManagerComponent } from './services-manager/services-manager.component';
+import { AddBeauticianComponent } from './add-beautician/add-beautician.component';
 
 
 const routes: Routes = [
@@ -35,6 +37,8 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'catalog', component: CatalogComponent},
   { path: "services/:id_service", component: ServiceCardViewComponent },
+  { path: "services-manager", component: ServicesManagerComponent },
+  { path: "add-beautician", component: AddBeauticianComponent},
 ];
 
 @NgModule({

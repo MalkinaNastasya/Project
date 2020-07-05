@@ -6,18 +6,34 @@
     <a class="collection-item" [routerLink]="['/services']">Список услуг</a>
   </div>
 
-  <div class="row" *ngFor="let beautician of beauticians">
-    <div class="col s12 m6">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">{{beautician.name}}</span>
-          <p>Должность: {{beautician.role}}</p> <br>
-          <p>Услуги: {{beautician.services}}</p>
-        </div>
-        <div class="card-action">
-          <a href="#">Удалить</a>
-        </div>
+  
+  <div class="container-for-main-block">
+    <div class="row mt-2 mb-1">
+    <div class="col-5">
+      <div class="input-group mb-2">
+        <input type="text" [(ngModel)]="search_beautician" class="form-control" placeholder="Поиск по сотрудникам">
       </div>
     </div>
   </div>
+  
+  <div *ngIf="loading" style="height: calc(100vh - 73px - 2rem);" class="container d-flex justify-content-center align-content-center">
+      <div  class="spinner-border txt-gray-bread m-auto" role="status">
+        <span class="sr-only ">Loading...</span>
+      </div>
   </div>
+    <div class="container mt-5" *ngIf="!loading">
+        <div class="row" *ngIf="!hide2">
+          <div class="col-sm-12 col-md-12 col-lg-auto col-xl-auto">
+            <a class="btn btn-success btn-block" [routerLink]="['/add-beautician']">Добавить нового сотрудника</a>
+          </div>
+            </div>
+        <div *ngIf="!notfound; else blockNotFound" class="row mt-3 justify-content-md-start justify-content-lg-between justify-content-center  justify-content-xl-start">
+          <app-beautician-card *ngFor="let beautician of beauticians | filterService:search_beautician" [beautician]="beautician" (del)="onDeleteService(beautician.id)" class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12"></app-beautician-card>
+        </div>
+        <ng-template #blockNotFound>
+          <h3 class="font-weight-normal">К сожалению, услуг не найдено.</h3>
+        </ng-template>
+    </div>
+</div>
+</div>
+    

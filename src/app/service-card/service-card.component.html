@@ -6,7 +6,7 @@
         <p>Стоимость: {{service.cost}}</p>
       </div>
       <div class="card-action">
-        <div class="btn-group" *ngIf="!hide1">
+        <div class="btn-group" *ngIf="!hide1 || !hide2">
             <button type="button" class=" btn-sm btn btn-danger" (click)="onDeleteService(service.id)">Удалить</button> 
         </div>
         <!-- <div class="btn-group"  *ngIf="!hide3">

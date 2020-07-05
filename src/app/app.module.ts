@@ -26,6 +26,10 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { FilterServicePipe } from './shared/pipes/filter-service.pipe';
 import { ServiceCardComponent } from './service-card/service-card.component';
 import { ServiceCardViewComponent } from './service-card-view/service-card-view.component';
+import { ManagerComponent } from './manager/manager.component';
+import { ServicesManagerComponent } from './services-manager/services-manager.component';
+import { BeauticianCardComponent } from './beautician-card/beautician-card.component';
+import { AddBeauticianComponent } from './add-beautician/add-beautician.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,11 @@ import { ServiceCardViewComponent } from './service-card-view/service-card-view.
     CatalogComponent,
     FilterServicePipe,
     ServiceCardComponent,
-    ServiceCardViewComponent
+    ServiceCardViewComponent,
+    ManagerComponent,
+    ServicesManagerComponent,
+    BeauticianCardComponent,
+    AddBeauticianComponent
   ],
   imports: [
     BrowserModule,
