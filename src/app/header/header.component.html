@@ -5,6 +5,7 @@
         <li><a [routerLink]="['/about-us']">О нас</a></li>
         <li><a [routerLink]="['/services-menu']">Услуги</a></li>
         <li><a [routerLink]="['/contacts']">Контакты</a></li>
+        <li *ngIf="(!logOut) && (role!='')"> <a class="nav-link nav-role" *ngIf="!logOut" [routerLink]="['/profile']" >{{name}}, Ваш кабинет {{role}} </a></li>
         <li *ngIf="logOut"><a class="waves-effect waves-light btn" [routerLink]="['/authorization']">Войти</a></li>
         <li *ngIf="!logOut"> <a  (click)="onLogOut()" class="waves-effect waves-light btn" >Выйти</a></li>
       </ul>
