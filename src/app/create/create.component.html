@@ -1,0 +1,32 @@
+<div class="container">
+  <h2 class="Title"> Личный кабинет клиента</h2>
+<div class="collection">
+    <a class="collection-item" [routerLink]="['/my-appointments']">Мои записи</a>
+    <a class="collection-item active" [routerLink]="['/create']">Записаться на прием</a>
+</div>
+<div class="container">
+    <h2 class="mb-3">Создание новой записи</h2>
+    <h5 *ngIf="succes" class="text-success">Запись была успешно создана!</h5>
+        <form [formGroup]="form" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="text"> Введите название услуги</label>
+              <input (focus)="onSucces()" formControlName="name" type="text" class="foc-bread br-gray-bread form-control" id="name">
+             </div>
+             <div class="form-group">
+                <label for="text">Введите дату и время</label>
+                <input (focus)="onSucces()" formControlName="time" type="text" class="foc-bread br-gray-bread form-control" id="time">
+               </div>
+            <div class="form-group">
+                <label for="text">Введите фимилию и имя специалиста</label>
+                <input (focus)="onSucces()" formControlName="cost" type="text" class="foc-bread br-gray-bread form-control" id="cost">
+               </div>
+            
+             
+             <h5 *ngIf="!isEmpty" class="text-danger">Одно или несколько полей пустые!</h5>
+             <button class="btn" (click)="onAdd()">Создать</button>
+    <br><br><br><br><br><br><br>
+
+  </form>
+</div>
+</div>
+

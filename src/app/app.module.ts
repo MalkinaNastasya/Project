@@ -16,6 +16,13 @@ import { BeauticiansComponent } from './beauticians/beauticians.component';
 import { ServicesComponent } from './services/services.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AddComponent } from './add/add.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ServicesMenuComponent } from './services-menu/services-menu.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { CabinetComponent } from './cabinet/cabinet.component';
+import { MyAppointmentsComponent } from './my-appointments/my-appointments.component';
+import { CreateComponent } from './create/create.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +35,14 @@ import { AddComponent } from './add/add.component';
     BeauticiansComponent,
     ServicesComponent,
     RegistrationComponent,
-    AddComponent
+    AddComponent,
+    AboutUsComponent,
+    ServicesMenuComponent,
+    ContactsComponent,
+    CabinetComponent,
+    MyAppointmentsComponent,
+    CreateComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

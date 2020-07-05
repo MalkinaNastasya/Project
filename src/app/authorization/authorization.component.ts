@@ -9,20 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./authorization.component.css']
 })
 export class AuthorizationComponent implements OnInit {
-// Логическая переменная, определяющая наличие или отсутсвие сообщения о неправильном логине или пароле 
-notExistLoginOrPassword=true;
-// Логическая переменная, определяющая наличие или отсутсвие сообщения о незаполненных обязательных полях 
-isEmpty=true;
-form :FormGroup;
-admin = {
-  id: 1,
-  login: "",
-  password: "",
-  role: ""
-}
+
+  // Логическая переменная, определяющая наличие или отсутсвие сообщения о неправильном логине или пароле 
+  notExistLoginOrPassword=true;
+  // Логическая переменная, определяющая наличие или отсутсвие сообщения о незаполненных обязательных полях 
+  isEmpty=true;
+  form :FormGroup;
+  user = {
+    id: "",
+    login: "",
+    password: "",
+    name: "",
+    role: ""
+  }
 
 constructor(private api: MainService, private router: Router) { }
-
 ngOnInit() {
   // Инициализация FormGroup, создание FormControl, и назанчение Validators
   this.form = new FormGroup({
@@ -33,6 +34,7 @@ ngOnInit() {
 
 // Функция входа, отправляющая данные, полученные с формы на сервер, и реагирующая на ответ с сервера
 async onLogin() {
+ localStorage.clear();
   if ((this.form.value.login=="")||(this.form.value.password=="")) {
     this.isEmpty=false;
   } else
@@ -48,15 +50,18 @@ async onLogin() {
     let ExistOrNot = await this.api.post(JSON.stringify(infoAboutUser), "/login");
     this.form.reset();  
     if (ExistOrNot != "not exist") {
-      this.admin.id = +ExistOrNot[0].id;
-      this.admin.login = ExistOrNot[0].login;
-      this.admin.password = ExistOrNot[0].password;
-      this.admin.role = ExistOrNot[0].role; 
-      console.log(this.admin);       
+      this.user.id = ExistOrNot[0].id;
+      this.user.login = ExistOrNot[0].login;
+      this.user.password = ExistOrNot[0].password;
+      this.user.name = ExistOrNot[0].name; 
+      this.user.role = ExistOrNot[0].role; 
+      console.log(this.user);       
       this.notExistLoginOrPassword = true;
-      localStorage.setItem('role', this.admin.role);
-      this.router.navigate(['/admin']);
-      
+      localStorage.setItem("role", this.user.role);
+      localStorage.setItem("id", this.user.id);
+      localStorage.setItem('name', this.user.name);
+      this.router.navigate(['/profile']);
+
     } else {
       this.notExistLoginOrPassword = false;
       console.log("Неверный логин или пароль");

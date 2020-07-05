@@ -1,0 +1,22 @@
+<div class="container">
+  <h2 class="Title"> Личный кабинет клиента</h2>
+<div class="collection">
+    <a class="collection-item active" [routerLink]="['/my-appointments']">Мои записи</a>
+    <a class="collection-item" [routerLink]="['/create']">Записаться на прием</a>
+</div>
+
+<div class="row" *ngFor="let beautician of beauticians">
+    <div class="col s12 m6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">{{beautician.serv}}</span>
+          <p>Даты и время: {{beautician.date}}</p> <br>
+          <p>Косметолог: {{beautician.cosm}}</p>
+        </div>
+        <div class="card-action">
+          <a href="#">Отменить</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

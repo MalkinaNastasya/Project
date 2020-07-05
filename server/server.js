@@ -59,13 +59,46 @@ connection.getConnection((err, connect) => {
   if (connect) connect.release();
 });
 
+// Регистрация пользователя
+app.post("/api/registration", (req, res) => {
+  if (!req.body) return res.sendStatus(400);
+  console.log('Пришёл POST запрос для пользователей:');
+  console.log(req.body);
+  connection.query(`SELECT * FROM clients WHERE login='${req.body.login}'`, function (error, results) {
+    if (error) {
+      res.status(500).send('Ошибка сервера при получении пользователей с таким же логином')
+      console.log(error);
+    }
+    console.log('Результаты проверки существования логина:');
+    console.log(results[0]);
+    if (results[0] === undefined) {
+      connection.query('INSERT INTO `clients` (`id`, `login`, `password`, `name`, `sername`, `phone`, `email`, `role`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)',
+        [req.body.login, req.body.password, req.body.name, req.body.sername, req.body.phone, req.body.email, req.body.role],
+        function () {
+          console.log('Запрос на проверку существования созданной записи в БД');
+          connection.query(`SELECT * FROM clients WHERE login="${req.body.login}"`,
+            function (err, result) {
+              if (err) {
+                res.status(500).send('Ошибка сервера при получении пользователя по логину')
+                console.log(err);
+              } else {
+                console.log(result);
+                res.json(result);
+              }
+            });
+        })
+    } else {
+      res.json("exist");
+    }
+  });
+})
 
-//Обработка входа администратора
+//Обработка входа 
 app.post("/api/login", (req, res) => {
   if (!req.body) return res.sendStatus(400);
   console.log('Пришёл POST запрос для входа:');
   console.log(req.body);
-  connection.query(`SELECT * FROM admins WHERE (login="${req.body.login}") AND (password="${req.body.password}")`,
+  connection.query(`SELECT * FROM clients WHERE (login="${req.body.login}") AND (password="${req.body.password}")`,
     function (err, results) {
       if (err) {
         res.status(500).send('Ошибка сервера при получении пользователя по логину')
@@ -73,7 +106,7 @@ app.post("/api/login", (req, res) => {
       }
       console.log('Результаты проверки существования пользователя:');
       if (results !== undefined) {
-        console.log(results[0]);
+        // console.log(results[0]);
         if (results[0] === undefined) {
           res.json("not exist");
         } else {
@@ -171,6 +204,25 @@ app.post("/api/add", (req, res) => {
         res.json("create");
       });
   })
+
+  app.get("/api/new", function (req, res) {
+    try {
+      connection.query("SELECT * FROM `new`", function (
+        error,
+        results,
+        fields
+      ) {
+        if (error) {
+          res.status(500).send("Ошибка сервера при получении списка косметологов");
+          console.log(error);
+        }
+        res.json(results);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
 
 // Информирование о запуске сервера и его порте
 app.listen(3001, () => {
