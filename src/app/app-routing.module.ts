@@ -18,6 +18,9 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { ServiceCardViewComponent } from './service-card-view/service-card-view.component';
 import { ServicesManagerComponent } from './services-manager/services-manager.component';
 import { AddBeauticianComponent } from './add-beautician/add-beautician.component';
+import { RecordMasterComponent } from './record-master/record-master.component';
+import { RecordDateComponent } from './record-date/record-date.component';
+import { RecordTimeComponent } from './record-time/record-time.component';
 
 
 const routes: Routes = [
@@ -39,6 +42,9 @@ const routes: Routes = [
   { path: "services/:id_service", component: ServiceCardViewComponent },
   { path: "services-manager", component: ServicesManagerComponent },
   { path: "add-beautician", component: AddBeauticianComponent},
+  { path: "record-master/:id_service", component: RecordMasterComponent },
+  { path: "record-date/record", component: RecordDateComponent},
+  { path: "record-time/record", component: RecordTimeComponent},
 ];
 
 @NgModule({

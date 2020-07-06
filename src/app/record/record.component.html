@@ -1,0 +1,18 @@
+<div class="col s12 m6">
+    <div class="card blue-grey darken-1" *ngIf="demonstrateRecord">
+      <div class="card-content white-text">
+        <div class="card-body">
+            <span class="card-title">Запись №{{record.id_record}}</span>
+          <p>Услуга: {{record.service}}</p>
+          <p>Косметолог: {{record.beautican}}</p>
+          <p>Дата посещения: {{record.data}}</p>
+          <p>Время посещения: {{record.time}}:00</p>
+          <p>Стоимость: {{record.cost}}</p>
+          <p>Статус: {{record.status}}</p>
+          <div *ngIf="!hideClient" class="d-flex justify-content-between align-items-center">
+              <button type="button" class=" btn-sm btn btn-danger" (click)="onDeleteRecord(record.id_record)">Отменить</button> 
+          </div>
+        </div>
+      </div>
+  </div>
+  

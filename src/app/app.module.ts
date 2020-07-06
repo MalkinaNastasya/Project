@@ -30,6 +30,10 @@ import { ManagerComponent } from './manager/manager.component';
 import { ServicesManagerComponent } from './services-manager/services-manager.component';
 import { BeauticianCardComponent } from './beautician-card/beautician-card.component';
 import { AddBeauticianComponent } from './add-beautician/add-beautician.component';
+import { RecordMasterComponent } from './record-master/record-master.component';
+import { RecordDateComponent } from './record-date/record-date.component';
+import { RecordTimeComponent } from './record-time/record-time.component';
+import { RecordComponent } from './record/record.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,11 @@ import { AddBeauticianComponent } from './add-beautician/add-beautician.componen
     ManagerComponent,
     ServicesManagerComponent,
     BeauticianCardComponent,
-    AddBeauticianComponent
+    AddBeauticianComponent,
+    RecordMasterComponent,
+    RecordDateComponent,
+    RecordTimeComponent,
+    RecordComponent
   ],
   imports: [
     BrowserModule,

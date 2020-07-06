@@ -254,6 +254,91 @@ app.post("/api/add", (req, res) => {
         res.json("create");
       });
   })
+// Обработка создания записи к мастеру
+app.post("/api/record", (req, res) => {
+  if (!req.body) return res.sendStatus(400);
+  console.log('Сейчас пришёл POST запрос для создания записи:');
+  console.log(req.body);
+  connection.query(`INSERT INTO records (beautican, service, id, data, time, cost, status) 
+  VALUES (?, ?, ?, ?, ?, ?, ?);`,
+  [req.body.beautican, req.body.service, req.body.id, req.body.data, req.body.time, req.body.cost, 
+    req.body.status],
+    function (err) {
+      if (err) {
+        res.status(500).send('Ошибка сервера при cоздании записи')
+        console.log(err);
+      }
+      console.log('Создание прошло успешно');
+      res.json("create");
+    });
+})
+
+// Обработка удаления карточки записи
+app.delete("/api/deleteRecord/:id_record", (req, res) => {
+  if (!req.body) return res.sendStatus(400);
+  console.log('Пришёл DELETE запрос для удаления карточки:');
+  console.log(req.body);
+  connection.query(`DELETE FROM records WHERE id_record=${req.params.id_record}`,
+    function (err) {
+      if (err) {
+        res.status(500).send('Ошибка сервера при удалении карточки по id')
+        console.log(err);
+      }
+      console.log('Удаление прошло успешно');
+      res.json("delete");
+    });
+})
+
+// Получение списка записей для администратора
+app.get('/api/records', function (req, res) {
+  try {
+    connection.query("SELECT * FROM `records`", function (error, results) {
+      if (error) {
+        res.status(500).send('Ошибка сервера при получении списка мастеров')
+        console.log(error);
+      }
+      console.log('Результаты получения списка мастеров');
+      console.log(results);
+      res.json(results);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Получение списка всех записей по одному клиенту
+app.get('/api/records/:id_user', function (req, res) {
+  try {
+    connection.query(`SELECT * FROM records WHERE id=${req.params.id_user}`, function (error, results) {
+      if (error) {
+        res.status(500).send('Ошибка сервера при получении списка мастеров')
+        console.log(error);
+      }
+      console.log('Результаты получения списка мастеров');
+      console.log(results);
+      res.json(results);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Получение одной записи
+app.get('/api/oneRecord', function (req, res) {
+  try {
+    connection.query(`SELECT * FROM records WHERE id_records=${req.body.id_record}`, function (error, results) {
+      if (error) {
+        res.status(500).send('Ошибка сервера при получении заявки')
+        console.log(error);
+      }
+      console.log('Результаты получения списка заявок');
+      console.log(results);
+      res.json(results);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
   app.get("/api/new", function (req, res) {
     try {

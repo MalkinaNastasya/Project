@@ -4,29 +4,29 @@
     <a class="collection-item" [routerLink]="['/my-appointments']">Мои записи</a>
     <a class="collection-item active" [routerLink]="['/create']">Записаться на прием</a>
 </div>
-<div class="container">
-    <h2 class="mb-3">Создание новой записи</h2>
-    <h5 *ngIf="succes" class="text-success">Запись была успешно создана!</h5>
-        <form [formGroup]="form" enctype="multipart/form-data">
-            <div class="form-group">
-              <label for="text"> Введите название услуги</label>
-              <input (focus)="onSucces()" formControlName="name" type="text" class="foc-bread br-gray-bread form-control" id="name">
-             </div>
-             <div class="form-group">
-                <label for="text">Введите дату и время</label>
-                <input (focus)="onSucces()" formControlName="time" type="text" class="foc-bread br-gray-bread form-control" id="time">
-               </div>
-            <div class="form-group">
-                <label for="text">Введите фимилию и имя специалиста</label>
-                <input (focus)="onSucces()" formControlName="cost" type="text" class="foc-bread br-gray-bread form-control" id="cost">
-               </div>
-            
-             
-             <h5 *ngIf="!isEmpty" class="text-danger">Одно или несколько полей пустые!</h5>
-             <button class="btn" (click)="onAdd()">Создать</button>
-    <br><br><br><br><br><br><br>
-
-  </form>
-</div>
+<div class="container-for-main-block">
+  <h4 class="mt-5 mb-3 d-flex justify-content-center">Выберите услугу</h4>
+  <div class="row mt-2 mb-1">
+  <div class="col-5">
+    <div class="input-group mb-2">
+      <input type="text" [(ngModel)]="search_service" class="form-control" placeholder="Поиск по каталогу услуг">
+    </div>
+  </div>
 </div>
 
+
+
+<div *ngIf="loading" style="height: calc(100vh - 73px - 2rem);" class="container d-flex justify-content-center align-content-center">
+    <div  class="spinner-border txt-gray-bread m-auto" role="status">
+      <span class="sr-only ">Loading...</span>
+    </div>
+    </div>
+  <div class="container mt-5" *ngIf="!loading">
+      <div *ngIf="!notfound; else blockNotFound" class="row mt-3 justify-content-md-start justify-content-lg-between justify-content-center  justify-content-xl-start">
+        <app-service-card *ngFor="let service of services | filterService:search_service" [service]="service" (del)="onDeleteService(service.id)" class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12"></app-service-card>
+      </div>
+      <ng-template #blockNotFound>
+        <h3 class="font-weight-normal">К сожалению, услуг не найдено.</h3>
+      </ng-template>
+  </div>
+  

@@ -9,40 +9,6 @@ import { Beautician } from '../shared/modals/beautician.modal';
 })
 export class BeauticiansComponent implements OnInit {
 
-//   @Input() beautician
-//   beauticians: Beautician[] = [];
-//   constructor(private api: MainService) { }
-  
-//   async ngOnInit() {
-//     let beauticianssarr = await this.getBeautician();
-//     if (Array.isArray(beauticianssarr)) {
-//       beauticianssarr.forEach((element) => {
-//         let el: Beautician = {  
-//           id: element.id,
-//           name: element.name,
-//           role: element.role,
-//           services: element.services,
-//         };
-//         this.beauticians.push(el);       
-//       });
-//     }
-//   }
-
-//     async getBeautician() { 
-//       let response;
-//        try {
-//          response = await this.api.get("/beauticians");
-//          console.log("RESPONSE");
-//          console.log(response);
-//        } catch (error) {
-//          console.log(error);
-//        }
-//        return response;
-//      }
-
-
-// }
-
 
 service_filter: boolean;
 search_beautician = "";

@@ -1,8 +1,9 @@
 .collection{
     width: 200px;
 }
-.row{
+.container-for-main-block{
     margin-left: 300px;
+    margin-top: -100px;
 }
 .container{
     margin-left: 20px;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from '../shared/services/main.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Service } from '../shared/modals/service.modal';
 
 @Component({
   selector: 'app-create',
@@ -8,51 +9,62 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-  form: FormGroup;
-
-  // Логическая переменная, определяющая наличие или отсутсвие сообщения о незаполненных обязательных полях 
-  isEmpty=true;
-  // Логическая переменная, определяющая наличие или отсутсвие сообщения об успешном добавлении услуги
-  succes=false;
-  api: any;
-
-  constructor(private mainService: MainService) { }
-
-  ngOnInit() {
-    // Инициализация FormGroup, создание FormControl, и назанчение Validators
-    this.form = new FormGroup({
-      'name': new FormControl('', [Validators.required]),
-      'time': new FormControl('', [Validators.required]),
-      'cost': new FormControl('', [Validators.required]),
-      })
-  }
-
-  // Функция добавления информации об услуге, полученной с формы, в базу данных
-  async onAdd(){   
-    if ((this.form.value.name=="")||(this.form.value.time=="")||(this.form.value.cost=="")) {
-      this.isEmpty=false;
-    } else {
-      this.isEmpty=true;
-      let service = {
-        name: this.form.value.name,
-        time: this.form.value.time,
-        cost: this.form.value.cost,
+  
+  service_filter: boolean;
+  search_service = "";
+ 
+  // Логическая переменная, определяющая наличие или отсутсвие сообщения о незаполненных обязательных полях
+  loading = false;
+  // Логическая переменная, определяющая наличие или отсутсвие ссылки на страницу добавления нового товара
+  hide1 = true;
+  hide2 = true;
+  hide3 = true;
+  // Логическая переменная, определяющая наличие или отсутсвие сообщения о ненайденных товарах
+  notfound = false;
+  services: Service[] = [];
+  constructor(private mainService: MainService) {}
+ 
+  async ngOnInit() {
+    // Получение списка всех услуг,  имеющихся в БД
+    this.loading = true;
+    try {
+      let result = await this.mainService.get("/services");
+      if (Object.keys(result).length == 0) {
+        console.log("пусто");
+        result = undefined;
       }
-      console.log(service);
-      try {;
-        let result = await this.mainService.post(JSON.stringify(service), "/add_services");
-      } catch (err) {
-        console.log(err);
+      if (typeof result !== "undefined") {
+        this.notfound = false;
+        console.log(result);
+        for (const one in result) {
+          this.services.push(
+            new Service(
+              result[one].id,
+              result[one].name,
+              result[one].time,
+              result[one].cost,
+              result[one].description,
+            )
+          );
+        }
+      } else {
+        this.notfound = true;
       }
-      this.form.reset();
-      this.succes=true;
-    }   
-  }
-// Функция, скрывающая сообщения о незаполненности полей и успешном добавлении услуги (вызвается при фокусировке на одном из полей формы)
-  onSucces(){
-    this.succes=false;
-    this.isEmpty=true;
+    } catch (error) {
+      console.log(error);
+    }
+    this.loading = false;
   }
 
-
-}
+ 
+  // Удаление из локального массива товаров определенного товара по id
+  onDeleteService(id) {
+    let index = this.services.findIndex((el) => {
+      return el.id == id;
+    });
+    this.services.splice(index, 1);
+    if (this.services.length == 0) {
+      this.notfound = true;
+    }
+  }
+ }
