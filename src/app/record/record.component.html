@@ -9,8 +9,8 @@
           <p>Время посещения: {{record.time}}:00</p>
           <p>Стоимость: {{record.cost}}</p>
           <p>Статус: {{record.status}}</p>
-          <div *ngIf="!hideClient" class="d-flex justify-content-between align-items-center">
-              <button type="button" class=" btn-sm btn btn-danger" (click)="onDeleteRecord(record.id_record)">Отменить</button> 
+          <div *ngIf="!hide1 || !hide3" class="d-flex justify-content-between align-items-center">
+              <button type="button" class=" btn-sm btn btn-danger" style="margin-top: 5px;" (click)="onDeleteRecord(record.id_record)">Отменить</button> 
           </div>
         </div>
       </div>

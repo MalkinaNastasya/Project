@@ -20,6 +20,7 @@ export class AuthorizationComponent implements OnInit {
     login: "",
     password: "",
     name: "",
+    sername: "",
     role: ""
   }
 
@@ -53,13 +54,15 @@ async onLogin() {
       this.user.id = ExistOrNot[0].id;
       this.user.login = ExistOrNot[0].login;
       this.user.password = ExistOrNot[0].password;
-      this.user.name = ExistOrNot[0].name; 
+      this.user.name = ExistOrNot[0].name;
+      this.user.sername = ExistOrNot[0].sername; 
       this.user.role = ExistOrNot[0].role; 
       console.log(this.user);       
       this.notExistLoginOrPassword = true;
       localStorage.setItem("role", this.user.role);
       localStorage.setItem("id", this.user.id);
       localStorage.setItem('name', this.user.name);
+      localStorage.setItem('sername', this.user.sername);
       this.router.navigate(['/profile']);
 
     } else {

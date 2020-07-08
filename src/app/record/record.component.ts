@@ -10,7 +10,9 @@ import { MainService } from '../shared/services/main.service';
 export class RecordComponent implements OnInit {
 
    // Логическая переменная определяющая наличие или отсуствие кнопки Удалить в карточке
-   hideClient = true;
+   hide1 = true;
+  hide2 = true;
+  hide3 = true;
    demonstrateRecord = true;
  
    @Input() record;
@@ -23,6 +25,28 @@ export class RecordComponent implements OnInit {
        this.demonstrateRecord = false;
      }
    }
+
+   ngDoCheck() {
+    this.hide1 = true;
+    this.hide2 = true;
+    this.hide3 = true;
+    if (localStorage.getItem("role") == "1") {
+      this.hide1 = false;
+      this.hide2 = false;
+      this.hide3 = false;
+    }
+    if (localStorage.getItem("role") == "2") {
+      this.hide1 = true;
+      this.hide2 = false;
+      this.hide3 = true;
+    }
+    if (localStorage.getItem("role") == "3") {
+      this.hide1 = true;
+      this.hide2 = true;
+      this.hide3 = false;
+    }
+  }
+ 
  
    // Функция удаления товара из БД
    async onDeleteRecord(id_record) {
@@ -34,11 +58,5 @@ export class RecordComponent implements OnInit {
      this.delete.emit(id_record);
      this.router.navigate(["/my-appointments"]);
    }
-   ngDoCheck() {
-     this.hideClient = true;
-     if (localStorage.getItem("role") == "3") {
-       this.hideClient = false;
-     }
-   }
- }
+    }
  
