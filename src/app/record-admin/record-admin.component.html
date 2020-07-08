@@ -12,9 +12,17 @@
             <span class="sr-only ">Loading...</span>
         </div>
     </div>
+    <div class="col-3">
+        <select class="browser-default" [(ngModel)]="filter_status">
+            <option value="0" selected>все</option>
+            <option value="1">Запись создана</option>
+            <option value="2">Запись отработана</option>
+            <option value="3">Запись оплачена</option>
+        </select>
+    </div>
     <div class="container mt-4" *ngIf="!loading">
         <div *ngIf="!notfound; else blockNotFound" class="row mt-3 justify-content-md-start justify-content-lg-between justify-content-center  justify-content-xl-start">
-            <app-record *ngFor="let record of records" [record]="record" class="col-lg-4 col-xl-4 col-md-6 col-sm-12 col-xs-12"></app-record>
+            <app-record *ngFor="let record of records | sort:filter_status" [record]="record" class="col-lg-4 col-xl-4 col-md-6 col-sm-12 col-xs-12"></app-record>
         </div>
         <ng-template #blockNotFound>
             <p class="font-weight-normal">К сожалению, записей нет</p>

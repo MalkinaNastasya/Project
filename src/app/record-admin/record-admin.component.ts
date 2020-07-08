@@ -8,6 +8,7 @@ import { MainService } from '../shared/services/main.service';
   styleUrls: ['./record-admin.component.css']
 })
 export class RecordAdminComponent implements OnInit {
+  filter_status='0';
   records: Record[] = [];
   loading = false;
   notfound = true;
@@ -27,6 +28,7 @@ export class RecordAdminComponent implements OnInit {
        this.notfound = false;
        console.log(result);
        for (const one in result) {
+        //  if ((this.filter_status != " ") || (this.filter_status == result[one].status)){
          this.records.push(
            new Record(
              result[one].id_record,
@@ -39,7 +41,7 @@ export class RecordAdminComponent implements OnInit {
              result[one].status
            )
          );
-         console.log(result[one].beautican);
+        // }
        }       
      } else {
        this.notfound = true;

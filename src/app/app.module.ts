@@ -34,6 +34,7 @@ import { RecordDateComponent } from './record-date/record-date.component';
 import { RecordComponent } from './record/record.component';
 import { RecordManagerComponent } from './record-manager/record-manager.component';
 import { RecordAdminComponent } from './record-admin/record-admin.component';
+import { SortPipe } from './shared/pipes/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { RecordAdminComponent } from './record-admin/record-admin.component';
     RecordDateComponent,
     RecordComponent,
     RecordManagerComponent,
-    RecordAdminComponent
+    RecordAdminComponent,
+    SortPipe
   ],
   imports: [
     BrowserModule,

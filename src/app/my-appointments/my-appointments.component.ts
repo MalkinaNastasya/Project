@@ -11,6 +11,7 @@ import { Record } from '../shared/modals/record.modal';
 })
 export class MyAppointmentsComponent implements OnInit {
 
+  filter_status="0";
   records: Record[] = [];
   loading = false;
   notfound = true;
