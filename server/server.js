@@ -340,23 +340,24 @@ app.get('/api/oneRecord', function (req, res) {
   }
 });
 
-  app.get("/api/new", function (req, res) {
-    try {
-      connection.query("SELECT * FROM `new`", function (
-        error,
-        results,
-        fields
-      ) {
-        if (error) {
-          res.status(500).send("Ошибка сервера при получении списка косметологов");
-          console.log(error);
-        }
-        res.json(results);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  });
+app.put("/api/changeStatus/:id_record", (req, res) => {
+  if (!req.body) return res.sendStatus(400);
+  console.log('Пришёл PUT запрос для изменения статуса:');
+  console.log(req.body);
+  connection.query(`UPDATE records SET status=? WHERE id_record=?`,
+    [req.body.status, req.params.id_record],
+    function (err) {
+      if (err) {
+        res.status(500).send('Ошибка сервера при запросе для изменения статуса')
+        console.log(err);
+      }
+      console.log('Изменение прошло успешно');
+      res.json("create");
+    });
+})
+
+ 
+
 
 
 // Информирование о запуске сервера и его порте

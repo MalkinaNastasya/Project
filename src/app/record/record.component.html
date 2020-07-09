@@ -9,9 +9,12 @@
           <p>Время посещения: {{record.time}}:00</p>
           <p>Стоимость: {{record.cost}}</p>
           <p>Статус: {{record.status}}</p>
-          <div *ngIf="!hide1 || !hide3" class="d-flex justify-content-between align-items-center">
+          <div *ngIf="(!hide1 || !hide3) && record.status == 'Запись создана'" class="d-flex justify-content-between align-items-center">
               <button type="button" class=" btn-sm btn btn-danger" style="margin-top: 5px;" (click)="onDeleteRecord(record.id_record)">Отменить</button> 
           </div>
+          <div *ngIf="!hide1 && record.status == 'Запись создана'" class="d-flex justify-content-between align-items-center">
+            <button type="button" class=" btn-sm btn btn-danger" style="margin-top: 5px;" (click)="onChangeStatus(record.id_record)">Оплачено</button> 
+        </div>
         </div>
       </div>
   </div>

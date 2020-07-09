@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MainService } from '../shared/services/main.service';
+import { Record } from '../shared/modals/record.modal';
 
 @Component({
   selector: 'app-record',
@@ -8,7 +9,6 @@ import { MainService } from '../shared/services/main.service';
   styleUrls: ['./record.component.css']
 })
 export class RecordComponent implements OnInit {
-
    // Логическая переменная определяющая наличие или отсуствие кнопки Удалить в карточке
    hide1 = true;
   hide2 = true;
@@ -56,7 +56,26 @@ export class RecordComponent implements OnInit {
        console.log(error);
      }
      this.delete.emit(id_record);
-     this.router.navigate(["/my-appointments"]);
+   }
+   async onChangeStatus(id_record){
+    try {
+      let newRecord = new Record(
+        this.record.id_record,
+        this.record.beautican,
+        this.record.service,
+        this.record.id,
+        this.record.data,
+        this.record.time,
+        this.record.cost,
+        this.record.status = "Запись оплачена"
+      );
+      let result = await this.mainService.put(
+        JSON.stringify(newRecord),
+        `/changeStatus/${id_record}`);
+        // this.router.navigate(["record-admin"]);
+    } catch (error) {
+      console.log(error);
+    }
    }
     }
  

@@ -7,3 +7,9 @@ h1{
 h4{
     padding-left: 370px;
 }
+.description-block{
+    margin-left: 300px;
+    margin-top: -150px;
+    font-size: 20px;
+    text-align: center;
+}

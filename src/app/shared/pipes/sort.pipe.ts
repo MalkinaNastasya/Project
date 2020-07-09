@@ -16,11 +16,6 @@ export class SortPipe implements PipeTransform {
             return search_record;
         } else if (search == "2") {
             let search_record = record.filter(
-                request => request.status === 'Запись выполнена'
-            );
-            return search_record;
-        } else if (search == "3") {
-            let search_record = record.filter(
               record => record.status === 'Запись оплачена'
             );
             return search_record;
